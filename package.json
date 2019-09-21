@@ -1,0 +1,43 @@
+{
+  "name": "@enso-ui/data-import",
+  "version": "1.0.0",
+  "description": "Basic Data Import package",
+  "main": "src/bulma/pages/dataImport/Index.vue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enso-ui/data-import.git"
+  },
+  "keywords": [
+    "data-import",
+    "vue"
+  ],
+  "author": "Adrian Ocneanu <aocneanu@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enso-ui/data-import/issues"
+  },
+  "homepage": "https://github.com/enso-ui/data-import#readme",
+  "devDependencies": {
+    "@vue/eslint-config-airbnb": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.1.6",
+    "eslint": "^5.0.1",
+    "eslint-plugin-vue": "^5.0.0",
+    "laravel-mix": "3.0.0",
+    "node-sass": "^4.11.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "@enso-ui/directives": "^1.0.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@enso-ui/bulma": "~1.2.0",
+    "@enso-ui/forms": "~1.2.0",
+    "@enso-ui/tables": "~1.1.0",
+    "v-tooltip": "^2.0.0-rc.32",
+    "vue": "^2.5.16"
+  }
+}
