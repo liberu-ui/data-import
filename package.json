@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/data-import",
-  "version": "1.0.4",
+  "version": "1.0.3",
   "description": "Basic Data Import package",
   "main": "src/bulma/pages/dataImport/Index.vue",
   "scripts": {
@@ -34,8 +34,8 @@
     "@enso-ui/directives": "1.0.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@enso-ui/bulma": "2.0.x",
-    "@enso-ui/ui": "2.0.x",
+    "@enso-ui/tables": "1.2.x",
+    "@enso-ui/ui": "2.1.x",
     "v-tooltip": "^2.0.0-rc.32",
     "vue": "^2.5.16"
   }
