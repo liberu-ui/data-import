@@ -24,8 +24,8 @@
     "@enso-ui/directives": "1.0.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
-    "@enso-ui/tables": "1.2.x",
-    "@enso-ui/ui": "2.2.x",
+    "@enso-ui/tables": "1.3.x",
+    "@enso-ui/ui": "2.3.x",
     "v-tooltip": "^2.0.0-rc.32",
     "vue": "^2.5.16"
   },
