@@ -54,7 +54,8 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-import { Uploader, Modal } from '@enso-ui/bulma';
+import { Uploader } from '@enso-ui/uploader/bulma';
+import { Modal } from '@enso-ui/modal/bulma';
 
 library.add(faUpload);
 

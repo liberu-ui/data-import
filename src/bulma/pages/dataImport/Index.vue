@@ -103,7 +103,8 @@ import {
     faUpload, faDownload, faTrashAlt, faFileExcel,
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
-import { EnsoSelect, Uploader } from '@enso-ui/bulma';
+import { EnsoSelect } from '@enso-ui/select/bulma';
+import { Uploader } from '@enso-ui/uploader/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 
