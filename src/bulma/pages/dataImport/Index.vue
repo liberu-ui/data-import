@@ -15,10 +15,7 @@
                     file-key="template"
                     @upload-start="loadingTemplate=true"
                     @upload-error="loadingTemplate = false"
-                    @upload-successful="
-                        template = $event;
-                        loadingTemplate = false
-                    "
+                    @upload-successful="template = $event.template; loadingTemplate = false"
                     v-if="!template">
                     <template v-slot:control="{ controlEvents }">
                         <a class="button is-info"
@@ -178,7 +175,7 @@ export default {
 
             axios.get(this.route('import.template', this.type))
                 .then(({ data }) => {
-                    this.template = data;
+                    this.template = data.template;
                     this.loadingTemplate = false;
                 }).catch((error) => {
                     this.loadingTemplate = false;
