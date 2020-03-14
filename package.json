@@ -27,7 +27,7 @@
     "@enso-ui/modal": "1.0.x",
     "@enso-ui/tables": "1.4.x",
     "@enso-ui/select": "1.2.x",
-    "@enso-ui/ui": "2.4.x",
+    "@enso-ui/ui": "2.5.x",
     "@enso-ui/uploader": "1.0.x",
     "v-tooltip": "^2.0.0-rc.32",
     "vue": "^2.5.16"
