@@ -74,16 +74,9 @@
                     {{ row.failed === null ? '-' : row.failed }}
                 </strong>
             </template>
-            <template v-slot:computedStatus="{ row }">
-                <span :class="[
-                        'tag is-table-tag',
-                        {'is-info': row.status === 10},
-                        {'is-warning': row.status === 20},
-                        {'is-primary': row.status === 23},
-                        {'is-danger': row.status === 26},
-                        {'is-success': row.status === 30}
-                    ]">
-                    {{ row.computedStatus }}
+            <template v-slot:status="{ column, row }">
+                <span :class="['tag is-table-tag', cssClass(column, row)]">
+                    {{ column.enum._get(row.status) }}
                 </span>
             </template>
         </enso-table>
@@ -166,6 +159,22 @@ export default {
     },
 
     methods: {
+        cssClass(column, { status }) {
+            switch (`${status}`) {
+                case column.enum.Waiting:
+                    return 'is-info';
+                case column.enum.Processing:
+                    return 'is-warning';
+                case column.enum.Processed:
+                    return 'is-primary';
+                case column.enum.ExportingRejected:
+                    return 'is-danger';
+                case column.enum.Finalized:
+                    return 'is-success';
+                default:
+                    throw Error;
+            };
+        },
         getTemplate() {
             if (!this.type) {
                 return;
