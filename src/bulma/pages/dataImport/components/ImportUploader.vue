@@ -22,8 +22,7 @@
                 </a>
             </template>
         </uploader>
-        <modal :show="hasErrors"
-            v-on="$listeners"
+        <modal v-on="$listeners"
             portal="import-summary"
             @close="summary = null"
             v-if="hasErrors">
@@ -74,7 +73,7 @@ export default {
         params: {
             type: Object,
             required: true,
-            validator: v => Object.keys(v).includes('type'),
+            validator: (v) => Object.keys(v).includes('type'),
         },
         path: {
             type: String,

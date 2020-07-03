@@ -1,6 +1,6 @@
 <template>
     <modal v-on="$listeners"
-        :show="show">
+        v-if="show">
         <div class="box">
             <h5 class="subtitle is-5">
                 {{ i18n("Are you sure that you want to delete the template file?") }}

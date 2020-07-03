@@ -103,7 +103,7 @@ library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 export default {
     name: 'Index',
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
+    inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
 
     components: {
         EnsoSelect, EnsoTable, Uploader, ImportUploader, TemplateModal,
@@ -161,19 +161,19 @@ export default {
     methods: {
         cssClass(column, { status }) {
             switch (`${status}`) {
-                case column.enum.Waiting:
-                    return 'is-info';
-                case column.enum.Processing:
-                    return 'is-warning';
-                case column.enum.Processed:
-                    return 'is-primary';
-                case column.enum.ExportingRejected:
-                    return 'is-danger';
-                case column.enum.Finalized:
-                    return 'is-success';
-                default:
-                    throw Error;
-            };
+            case column.enum.Waiting:
+                return 'is-info';
+            case column.enum.Processing:
+                return 'is-warning';
+            case column.enum.Processed:
+                return 'is-primary';
+            case column.enum.ExportingRejected:
+                return 'is-danger';
+            case column.enum.Finalized:
+                return 'is-success';
+            default:
+                throw Error;
+            }
         },
         getTemplate() {
             if (!this.type) {
@@ -197,7 +197,7 @@ export default {
                 .then(({ data }) => {
                     this.template = null;
                     this.summaryModal = false;
-                    this.$toastr.success(data.message);
+                    this.toastr.success(data.message);
                     this.loadingTemplate = false;
                 }).catch((error) => {
                     this.summaryModal = false;
@@ -207,7 +207,7 @@ export default {
         },
         downloadRejected({ rejectedId }) {
             if (!rejectedId) {
-                this.$toastr.info(this.i18n('No rejected summary available'));
+                this.toastr.info(this.i18n('No rejected summary available'));
                 return;
             }
 
