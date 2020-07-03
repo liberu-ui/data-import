@@ -26,7 +26,7 @@
     "@enso-ui/select": "^2.0",
     "@enso-ui/tables": "^2.0",
     "@enso-ui/ui": "^3.0",
-    "@enso-ui/uploader": "^1.0",
+    "@enso-ui/uploader": "^2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
     "v-tooltip": "^2.0.0-rc.32",
