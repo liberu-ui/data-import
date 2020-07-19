@@ -22,7 +22,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import Boolean from './params/Boolean.vue';
 import String from './params/String.vue';
-import Enum from './params/Enum.vue';
 import Date from './params/Date.vue';
 import CustomSelect from './params/CustomSelect.vue';
 
@@ -32,7 +31,7 @@ export default {
     name: 'Params',
 
     components: {
-        Boolean, String, Enum, Date, CustomSelect,
+        Boolean, String, Date, CustomSelect,
     },
 
     inject: ['route', 'i18n', 'errorHandler'],
