@@ -171,7 +171,8 @@ export default {
                 && Object.keys(this.summary.errors).length;
         },
         slots() {
-            return this.$refs.params?.slots() ?? [];
+            return this.params.filter((param) => param.type === 'custom')
+                .map((param) => param.name);
         },
     },
 

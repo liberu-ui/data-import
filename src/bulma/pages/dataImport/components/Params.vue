@@ -1,5 +1,5 @@
 <template>
-    <div class="columns">
+    <div class="columns is-multiline">
         <div v-for="param in params"
              class="column is-3-desktop is-8-tablet is-12-mobile"
              :key="param.name">
@@ -71,10 +71,6 @@ export default {
             return param.type === 'select'
                 ? 'custom-select'
                 : param.type;
-        },
-        slots() {
-            return this.params.filter((param) => param.type === 'custom')
-                .map((param) => param.name);
         },
     },
 };
