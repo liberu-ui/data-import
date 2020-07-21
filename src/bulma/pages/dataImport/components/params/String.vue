@@ -19,15 +19,3 @@ export default {
     },
 };
 </script>
-
-<style lang="scss" >
-    .table-filters.dropdown {
-        .is-right.icon {
-            pointer-events: all;
-
-            &.individual-search-mode {
-                right: 0.3em;
-            }
-        }
-    }
-</style>

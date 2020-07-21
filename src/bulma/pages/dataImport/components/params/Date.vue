@@ -27,25 +27,5 @@ export default {
         this.param.type = 'date';
         this.param.meta = this.param.meta || { dateFormat: 'Y-m-d' };
     },
-
-    methods: {
-        interval() {
-            return {
-                min: null,
-                max: null,
-            };
-        },
-    },
 };
 </script>
-
-<style lang="scss">
-    .money-filter {
-        .level-left, .level-right {
-            width: 49%;
-            .level-item {
-                width: 100%;
-            }
-        }
-    }
-</style>
