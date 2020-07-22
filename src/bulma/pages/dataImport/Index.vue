@@ -11,7 +11,7 @@
                 v-if="type">
                 <uploader class="animated fadeIn"
                     :url="templateLink"
-                    :params="params"
+                    :params="uploadParams"
                     file-key="template"
                     @upload-start="loadingTemplate=true"
                     @upload-error="loadingTemplate = false"
@@ -50,10 +50,18 @@
                 v-if="type">
                 <import-uploader class="is-pulled-right"
                     :path="importLink"
-                    :params="params"
+                    :params="uploadParams"
                     @upload-successful="$refs.imports.fetch()"/>
             </div>
         </div>
+        <params :params="params"
+            v-if="type"
+            ref="params">
+            <template v-for="slot in slots"
+                v-slot:[slot]>
+                <slot :name="slot"/>
+            </template>
+        </params>
         <enso-table class="box is-paddingless raises-on-hover"
             id="dataImports"
             :filters="filters"
@@ -97,6 +105,7 @@ import { EnsoSelect } from '@enso-ui/select/bulma';
 import { Uploader } from '@enso-ui/uploader/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
+import Params from './components/Params.vue';
 
 library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
 
@@ -106,7 +115,12 @@ export default {
     inject: ['canAccess', 'errorHandler', 'i18n', 'route', 'toastr'],
 
     components: {
-        EnsoSelect, EnsoTable, Uploader, ImportUploader, TemplateModal,
+        EnsoSelect,
+        EnsoTable,
+        Uploader,
+        ImportUploader,
+        TemplateModal,
+        Params,
     },
 
     directives: { tooltip: VTooltip },
@@ -118,11 +132,18 @@ export default {
         summaryModal: false,
         loadingTemplate: false,
         types: [],
+        vendorId: null,
+        params: [],
     }),
 
     computed: {
-        params() {
-            return { type: this.type };
+        uploadParams() {
+            const result = { type: this.type };
+            this.params.forEach((param) => {
+                result[param.name] = param.value;
+            });
+
+            return result;
         },
         filters() {
             return {
@@ -148,6 +169,10 @@ export default {
             return this.summary
                 && this.summary.errors
                 && Object.keys(this.summary.errors).length;
+        },
+        slots() {
+            return this.params.filter((param) => param.type === 'custom')
+                .map((param) => param.name);
         },
     },
 
@@ -182,9 +207,10 @@ export default {
 
             this.loadingTemplate = true;
 
-            axios.get(this.route('import.template', this.type))
+            axios.get(this.route('import.show', this.type))
                 .then(({ data }) => {
-                    this.template = data.template;
+                    this.params = data.import.params;
+                    this.template = data.import.template;
                     this.loadingTemplate = false;
                 }).catch((error) => {
                     this.loadingTemplate = false;
