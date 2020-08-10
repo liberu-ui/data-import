@@ -1,12 +1,13 @@
 <template>
     <datepicker class="has-margin-top-medium"
+        v-model="param.value"
         alt-input
         :placeholder="param.label"
-        :alt-format="param.meta.dateFormat"
-        v-model="param.value"/>
+        :alt-format="dateFormat"/>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Datepicker } from '@enso-ui/datepicker/bulma';
 
 export default {
@@ -23,9 +24,16 @@ export default {
         },
     },
 
+    computed: {
+        ...mapState(['meta']),
+        dateFormat() {
+            return this.param.meta?.dateFormat
+                ?? this.meta.dateFormat;
+        },
+    },
+
     created() {
         this.param.type = 'date';
-        this.param.meta = this.param.meta || { dateFormat: 'Y-m-d' };
     },
 };
 </script>
