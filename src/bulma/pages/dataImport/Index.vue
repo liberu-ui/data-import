@@ -67,6 +67,16 @@
             :filters="filters"
             @download-rejected="downloadRejected"
             ref="imports">
+            <template v-slot:reject="{ icon }">
+                <a class="button is-warning has-margin-left-small"
+                    @click="rejectStuckImports"
+                    v-if="canAccess('import.reject')">
+                    <span>{{ i18n('Reject Stuck Imports') }}</span>
+                    <span class="icon is-small">
+                        <fa :icon="icon"/>
+                    </span>
+                </a>
+            </template>
             <template v-slot:entries="{ row }">
                 <strong class="has-text-info">
                     {{ row.entries || '-' }}
@@ -98,7 +108,7 @@
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faUpload, faDownload, faTrashAlt, faFileExcel,
+    faUpload, faDownload, faTrashAlt, faFileExcel, faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
@@ -107,7 +117,9 @@ import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 import Params from './components/Params.vue';
 
-library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
+library.add(
+    faUpload, faDownload, faTrashAlt, faFileExcel, faSyncAlt,
+);
 
 export default {
     name: 'Index',
@@ -196,6 +208,8 @@ export default {
                 return 'is-danger';
             case column.enum.Finalized:
                 return 'is-success';
+            case column.enum.Rejected:
+                return 'is-danger';
             default:
                 throw Error;
             }
@@ -228,6 +242,15 @@ export default {
                 }).catch((error) => {
                     this.summaryModal = false;
                     this.loadingTemplate = false;
+                    this.errorHandler(error);
+                });
+        },
+        rejectStuckImports() {
+            axios.patch(this.route('import.reject'))
+                .then(({ data }) => {
+                    this.$refs.imports.fetch();
+                    this.toastr.success(data.message);
+                }).catch((error) => {
                     this.errorHandler(error);
                 });
         },
