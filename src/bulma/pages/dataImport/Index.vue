@@ -264,7 +264,10 @@ export default {
             window.location.href = this.route('import.downloadRejected', rejectedId);
         },
         canBeCanceled({ status }) {
-            return status < parseInt(this.enums.ioStatuses.Finalized, 10);
+            return [
+                this.enums.ioStatuses.Waiting,
+                this.enums.ioStatuses.Processing,
+            ].includes(`${status}`);
         },
     },
 };
