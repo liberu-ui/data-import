@@ -67,16 +67,6 @@
             :filters="filters"
             @download-rejected="downloadRejected"
             ref="imports">
-            <template v-slot:reject="{ icon }">
-                <a class="button is-warning has-margin-left-small"
-                    @click="rejectStuckImports"
-                    v-if="canAccess('import.reject')">
-                    <span>{{ i18n('Reject Stuck Imports') }}</span>
-                    <span class="icon is-small">
-                        <fa :icon="icon"/>
-                    </span>
-                </a>
-            </template>
             <template v-slot:entries="{ row }">
                 <strong class="has-text-info">
                     {{ row.entries || '-' }}
@@ -97,6 +87,15 @@
                     {{ column.enum._get(row.status) }}
                 </span>
             </template>
+            <template v-slot:cancel="{ icon, row }">
+                <a class="button is-small is-table-button has-margin-left-small is-row-button has-text-danger"
+                    @click="cancelStuckImports(row)"
+                    v-if="canAccess('import.cancel') && canBeCanceled(row)">
+                    <span class="icon is-small">
+                        <fa :icon="icon"/>
+                    </span>
+                </a>
+            </template>
         </enso-table>
         <template-modal :show="summaryModal"
             @close="summaryModal = false"
@@ -116,6 +115,7 @@ import { Uploader } from '@enso-ui/uploader/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 import Params from './components/Params.vue';
+import { mapState } from 'vuex';
 
 library.add(
     faUpload, faDownload, faTrashAlt, faFileExcel, faSyncAlt,
@@ -149,6 +149,7 @@ export default {
     }),
 
     computed: {
+        ...mapState(['enums']),
         uploadParams() {
             const result = { type: this.type };
             this.params.forEach((param) => {
@@ -208,7 +209,7 @@ export default {
                 return 'is-danger';
             case column.enum.Finalized:
                 return 'is-success';
-            case column.enum.Rejected:
+            case column.enum.Canceled:
                 return 'is-danger';
             default:
                 throw Error;
@@ -245,8 +246,8 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        rejectStuckImports() {
-            axios.patch(this.route('import.reject'))
+        cancelStuckImports({ id }) {
+            axios.patch(this.route('import.cancel', { dataImport: id }))
                 .then(({ data }) => {
                     this.$refs.imports.fetch();
                     this.toastr.success(data.message);
@@ -261,6 +262,9 @@ export default {
             }
 
             window.location.href = this.route('import.downloadRejected', rejectedId);
+        },
+        canBeCanceled({ status }) {
+            return status < parseInt(this.enums.ioStatuses.Finalized, 10);
         },
     },
 };
