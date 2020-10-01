@@ -87,15 +87,6 @@
                     {{ column.enum._get(row.status) }}
                 </span>
             </template>
-            <template v-slot:cancel="{ icon, row }">
-                <a class="button is-small is-table-button has-margin-left-small is-row-button has-text-danger"
-                    @click="cancelStuckImports(row)"
-                    v-if="canAccess('import.cancel') && canBeCanceled(row)">
-                    <span class="icon is-small">
-                        <fa :icon="icon"/>
-                    </span>
-                </a>
-            </template>
         </enso-table>
         <template-modal :show="summaryModal"
             @close="summaryModal = false"
@@ -107,7 +98,7 @@
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faUpload, faDownload, faTrashAlt, faFileExcel, faSyncAlt,
+    faUpload, faDownload, faTrashAlt, faFileExcel, faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
@@ -115,10 +106,9 @@ import { Uploader } from '@enso-ui/uploader/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 import Params from './components/Params.vue';
-import { mapState } from 'vuex';
 
 library.add(
-    faUpload, faDownload, faTrashAlt, faFileExcel, faSyncAlt,
+    faUpload, faDownload, faTrashAlt, faFileExcel, faBan,
 );
 
 export default {
@@ -149,7 +139,6 @@ export default {
     }),
 
     computed: {
-        ...mapState(['enums']),
         uploadParams() {
             const result = { type: this.type };
             this.params.forEach((param) => {
@@ -246,15 +235,6 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        cancelStuckImports({ id }) {
-            axios.patch(this.route('import.cancel', { dataImport: id }))
-                .then(({ data }) => {
-                    this.$refs.imports.fetch();
-                    this.toastr.success(data.message);
-                }).catch((error) => {
-                    this.errorHandler(error);
-                });
-        },
         downloadRejected({ rejectedId }) {
             if (!rejectedId) {
                 this.toastr.info(this.i18n('No rejected summary available'));
@@ -262,12 +242,6 @@ export default {
             }
 
             window.location.href = this.route('import.downloadRejected', rejectedId);
-        },
-        canBeCanceled({ status }) {
-            return [
-                this.enums.ioStatuses.Waiting,
-                this.enums.ioStatuses.Processing,
-            ].includes(`${status}`);
         },
     },
 };
