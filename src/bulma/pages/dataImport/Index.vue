@@ -98,7 +98,7 @@
 import { VTooltip } from 'v-tooltip';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faUpload, faDownload, faTrashAlt, faFileExcel,
+    faUpload, faDownload, faTrashAlt, faFileExcel, faBan,
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
@@ -107,7 +107,9 @@ import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 import Params from './components/Params.vue';
 
-library.add(faUpload, faDownload, faTrashAlt, faFileExcel);
+library.add(
+    faUpload, faDownload, faTrashAlt, faFileExcel, faBan,
+);
 
 export default {
     name: 'Index',
@@ -196,6 +198,8 @@ export default {
                 return 'is-danger';
             case column.enum.Finalized:
                 return 'is-success';
+            case column.enum.Canceled:
+                return 'is-danger';
             default:
                 throw Error;
             }
