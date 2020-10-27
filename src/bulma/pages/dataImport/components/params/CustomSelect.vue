@@ -24,7 +24,8 @@ export default {
     },
 
     created() {
-        this.param.value = this.param.multiple ? [] : null;
+        this.param.value = this.param.value
+            || (this.param.multiple ? [] : null);
     },
 
     computed: {
