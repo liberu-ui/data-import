@@ -1,6 +1,7 @@
 <template>
     <enso-select v-model="param.value"
          :source="param.route"
+         :label="label"
          :multiple="param.multiple"
          :params="param.params"/>
 </template>
@@ -23,7 +24,14 @@ export default {
     },
 
     created() {
-        this.param.value = this.param.multiple ? [] : null;
+        this.param.value = this.param.value
+            || (this.param.multiple ? [] : null);
     },
+
+    computed: {
+        label() {
+            return this.param.selectLabel || 'name'
+        }
+    }
 };
 </script>
