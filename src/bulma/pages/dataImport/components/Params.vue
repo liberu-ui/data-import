@@ -12,7 +12,8 @@
                     :param="param"/>
             </div>
             <slot v-else
-                :name="param.name"/>
+                :name="param.name"
+                :param="param"/>
         </div>
     </div>
 </template>

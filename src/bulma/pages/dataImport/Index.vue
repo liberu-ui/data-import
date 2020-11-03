@@ -56,12 +56,7 @@
         </div>
         <params :params="params"
             v-if="type"
-            ref="params">
-            <template v-for="slot in slots"
-                v-slot:[slot]>
-                <slot :name="slot"/>
-            </template>
-        </params>
+            ref="params"/>
         <enso-table class="box is-paddingless raises-on-hover"
             id="dataImports"
             :filters="filters"
