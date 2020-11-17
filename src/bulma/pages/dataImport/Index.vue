@@ -9,40 +9,11 @@
             </div>
             <div class="column is-6 is-hidden-touch has-text-centered"
                 v-if="type">
-                <uploader class="animated fadeIn"
-                    :url="templateLink"
-                    :params="uploadParams"
-                    file-key="template"
-                    @upload-start="loadingTemplate=true"
-                    @upload-error="loadingTemplate = false"
-                    @upload-successful="template = $event.template; loadingTemplate = false"
-                    v-if="!template">
-                    <template v-slot:control="{ controlEvents }">
-                        <a class="button is-info"
-                            v-on="controlEvents">
-                            <span>{{ i18n('Upload Template') }}</span>
-                            <span class="icon is-small">
-                                <fa icon="upload"/>
-                            </span>
-                        </a>
-                    </template>
-                </uploader>
                 <a class="button is-info animated fadeIn has-margin-right-small"
-                    v-if="template"
-                    v-tooltip="template.original_name"
                     :href="downloadLink">
                     <span>{{ i18n('Download Template') }}</span>
                     <span class="icon is-small">
                         <fa icon="download"/>
-                    </span>
-                </a>
-                <a class="button is-danger animated fadeIn"
-                    @click="summaryModal = true"
-                    v-if="template"
-                    :disabled="!canAccess('import.deleteTemplate')">
-                    <span>{{ i18n('Delete Template') }}</span>
-                    <span class="icon is-small">
-                        <fa icon="trash-alt"/>
                     </span>
                 </a>
             </div>
@@ -102,7 +73,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
-import { Uploader } from '@enso-ui/uploader/bulma';
 import ImportUploader from './components/ImportUploader.vue';
 import TemplateModal from './components/TemplateModal.vue';
 import Params from './components/Params.vue';
@@ -119,7 +89,6 @@ export default {
     components: {
         EnsoSelect,
         EnsoTable,
-        Uploader,
         ImportUploader,
         TemplateModal,
         Params,
@@ -130,7 +99,6 @@ export default {
     data: () => ({
         type: null,
         summary: {},
-        template: null,
         summaryModal: false,
         loadingTemplate: false,
         types: [],
@@ -152,15 +120,10 @@ export default {
                 data_imports: { type: this.type },
             };
         },
-        templateLink() {
-            return this.canAccess('import.uploadTemplate')
-                && this.type
-                && this.route('import.uploadTemplate');
-        },
         downloadLink() {
             return this.canAccess('import.downloadTemplate')
-                && this.template
-                && this.route('import.downloadTemplate', this.template.id);
+                && this.type
+                && this.route('import.downloadTemplate', this.type);
         },
         importLink() {
             return this.canAccess('import.store')
@@ -214,23 +177,8 @@ export default {
             axios.get(this.route('import.show', this.type))
                 .then(({ data }) => {
                     this.params = data.import.params;
-                    this.template = data.import.template;
                     this.loadingTemplate = false;
                 }).catch((error) => {
-                    this.loadingTemplate = false;
-                    this.errorHandler(error);
-                });
-        },
-        deleteTemplate(id) {
-            this.loadingTemplate = true;
-            axios.delete(this.route('import.deleteTemplate', id))
-                .then(({ data }) => {
-                    this.template = null;
-                    this.summaryModal = false;
-                    this.toastr.success(data.message);
-                    this.loadingTemplate = false;
-                }).catch((error) => {
-                    this.summaryModal = false;
                     this.loadingTemplate = false;
                     this.errorHandler(error);
                 });
