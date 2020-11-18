@@ -121,8 +121,7 @@ export default {
             };
         },
         downloadLink() {
-            return this.canAccess('import.template')
-                && this.type
+            return this.type
                 && this.route('import.template', this.type);
         },
         importLink() {
