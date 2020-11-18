@@ -36,7 +36,7 @@
         <enso-table class="box is-paddingless raises-on-hover"
             id="dataImports"
             :filters="filters"
-            @download-rejected="downloadRejected"
+            @download-rejected="rejected"
             ref="imports">
             <template v-slot:entries="{ row }">
                 <strong class="has-text-info">
@@ -183,13 +183,13 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        downloadRejected({ rejectedId }) {
+        rejected({ rejectedId }) {
             if (!rejectedId) {
                 this.toastr.info(this.i18n('No rejected summary available'));
                 return;
             }
 
-            window.location.href = this.route('import.downloadRejected', rejectedId);
+            window.location.href = this.route('import.rejected', rejectedId);
         },
     },
 };
