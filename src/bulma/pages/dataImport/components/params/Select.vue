@@ -1,7 +1,8 @@
 <template>
     <enso-select v-model="param.value"
          :source="param.route"
-         :label="label"
+         :label="param.selectLabel"
+         :placeholder="placeholder"
          :multiple="param.multiple"
          :params="param.params"/>
 </template>
@@ -10,7 +11,7 @@
 import { EnsoSelect } from '@enso-ui/select/bulma';
 
 export default {
-    name: 'CustomSelect',
+    name: 'Select',
 
     components: { EnsoSelect },
 
@@ -23,14 +24,11 @@ export default {
         },
     },
 
-    created() {
-        this.param.value = this.param.value
-            || (this.param.multiple ? [] : null);
-    },
-
     computed: {
-        label() {
-            return this.param.selectLabel || 'name'
+        placeholder() {
+            return this.param.placeholder
+                ? this.i18n(this.param.placeholder)
+                : this.param.placeholder;
         }
     }
 };

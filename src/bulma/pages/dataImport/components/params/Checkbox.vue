@@ -7,7 +7,7 @@
 import VueSwitch from '@enso-ui/switch/bulma';
 
 export default {
-    name: 'Boolean',
+    name: 'Checkbox',
 
     components: { VueSwitch },
 

@@ -25,6 +25,7 @@
     "@enso-ui/directives": "^1.0",
     "@enso-ui/modal": "^2.0",
     "@enso-ui/select": "^2.0",
+    "@enso-ui/strings": "^1.0",
     "@enso-ui/switch": "^1.0",
     "@enso-ui/tables": "^2.0",
     "@enso-ui/uploader": "^1.0",

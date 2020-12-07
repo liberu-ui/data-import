@@ -1,13 +1,13 @@
 <template>
     <input class="input"
-        :placeholder="i18n(param.label)"
+        :placeholder="i18n(param.placeholder)"
         v-model="param.value">
 </template>
 
 <script>
 
 export default {
-    name: 'String',
+    name: 'Input',
 
     inject: ['i18n'],
 
