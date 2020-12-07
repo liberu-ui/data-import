@@ -18,36 +18,9 @@
                 </div>
                 <div class="column"/>
                 <div class="column is-narrow">
-                    <div class="is-flex">
-                        <a class="button is-info animated fadeIn has-margin-right-medium"
-                            :href="templateLink"
-                            v-if="type">
-                            <span>{{ i18n('Template') }}</span>
-                            <span class="icon is-small">
-                                <fa icon="download"/>
-                            </span>
-                        </a>
-                        <uploader :url="importLink"
-                            :params="uploadParams"
-                            :file-size-limit="100000000"
-                            file-key="import"
-                            @upload-start="loading = true"
-                            @upload-error="loading = false"
-                            @upload-successful="uploaded"
-                            v-if="!hasErrors">
-                            <template v-slot:control="{ controlEvents }">
-                                <a :class="['button is-success', { 'is-loading': loading }]"
-                                    v-on="controlEvents">
-                                    <slot>
-                                        <span>{{ i18n('Import') }}</span>
-                                        <span class="icon is-small">
-                                            <fa icon="upload"/>
-                                        </span>
-                                    </slot>
-                                </a>
-                            </template>
-                        </uploader>
-                    </div>
+                    <import-uploader :path="importLink"
+                        :params="uploadParams"
+                        @upload-successful="$refs.imports.fetch()"/>
                 </div>
             </template>
         </div>
@@ -86,9 +59,6 @@
                     :user="row.createdBy"/>
             </template>
         </enso-table>
-        <Summary :summary="summary"
-            @close="summary = null"
-            v-if="hasErrors"/>
     </div>
 </template>
 
@@ -101,8 +71,7 @@ import {
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
 import { Avatar } from '@enso-ui/users';
-import { Uploader } from '@enso-ui/uploader/bulma';
-import Summary from './components/Summary.vue';
+import ImportUploader from './components/ImportUploader.vue';
 import Param from './components/Param.vue';
 
 library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
@@ -116,15 +85,12 @@ export default {
         Avatar,
         EnsoSelect,
         EnsoTable,
-        Uploader,
-        Summary,
+        ImportUploader,
         Param,
     },
 
     data: () => ({
-        loading: false,
         type: null,
-        summary: null,
         params: [],
     }),
 
@@ -133,20 +99,10 @@ export default {
         filters() {
             return { data_imports: { type: this.type } };
         },
-        hasErrors() {
-            return this.summary
-                && this.summary.errors
-                && Object.keys(this.summary.errors).length > 0;
-        },
         importLink() {
             return this.canAccess('import.store')
                 && this.type
                 && this.route('import.store');
-        },
-        templateLink() {
-            return this.canAccess('import.template')
-                && this.type
-                && this.route('import.template', this.type);
         },
         uploadParams() {
             return this.params.reduce((params, param) => {
@@ -164,10 +120,6 @@ export default {
         },
         rejected({ rejectedId }) {
             window.location.href = this.route('import.rejected', rejectedId);
-        },
-        uploaded($event) {
-            this.summary = $event;
-            this.loading = false;
         },
     },
 };
