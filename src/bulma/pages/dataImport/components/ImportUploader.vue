@@ -14,9 +14,9 @@
             v-on="$listeners"
             @upload-start="loading = true"
             @upload-error="loading = false"
-            @upload-successful="uploaded"
-            v-if="!hasErrors">
-            <template v-slot:control="{ controlEvents }">
+            @upload-successful="uploaded">
+            <template v-slot:control="{ controlEvents }"
+                v-if="!hasErrors">
                 <a :class="['button is-success', { 'is-loading': loading }]"
                     v-on="controlEvents">
                     <slot>
