@@ -2,7 +2,7 @@
     <datepicker class="has-margin-top-medium"
         v-model="param.value"
         alt-input
-        :placeholder="i18n(pparam.placeholder)"
+        :placeholder="i18n(param.placeholder)"
         :alt-format="dateFormat"/>
 </template>
 
