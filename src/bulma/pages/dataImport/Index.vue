@@ -118,8 +118,9 @@ export default {
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(this.errorHandler);
         },
-        rejected({ rejectedId }) {
-            window.location.href = this.route('import.rejected', rejectedId);
+        //  eslint-disable-next-line camelcase
+        rejected({ rejected_id }) {
+            window.location.href = this.route('import.rejected', rejected_id);
         },
     },
 };
