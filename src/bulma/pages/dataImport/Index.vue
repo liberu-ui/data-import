@@ -46,7 +46,7 @@
             </template>
             <template v-slot:failed="{ row }">
                 <strong class="has-text-danger">
-                    {{ row.failed === null ? '-' : row.failed }}
+                    {{ row.failed !== null && row.failed >= 0 ? row.failed : '-' }}
                 </strong>
             </template>
             <template v-slot:status="{ column, row }">
