@@ -14,7 +14,8 @@
             v-on="$listeners"
             @upload-start="loading = true"
             @upload-error="loading = false"
-            @upload-successful="uploaded">
+            @upload-successful="uploaded"
+            ref="uploader">
             <template v-slot:control="{ controlEvents }"
                 v-if="!hasErrors">
                 <a :class="['button is-success', { 'is-loading': loading }]"
@@ -87,6 +88,9 @@ export default {
             this.summary = $event;
             this.loading = false;
             // this.$emit('upload-successful');
+        },
+        browseFiles() {
+            this.$refs.uploader.browseFiles();
         },
     },
 };
