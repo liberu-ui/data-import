@@ -54,7 +54,7 @@
                     {{ column.enum._get(row.status) }}
                 </span>
             </template>
-            <template v-slot:createdBy="{ column, row }">
+            <template v-slot:createdBy="{ row }">
                 <avatar class="is-24x24"
                     :user="row.createdBy"/>
             </template>
@@ -66,7 +66,7 @@
 import { mapState } from 'vuex';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faDownload, faUpload, faTrashAlt, faFileExcel, faBan, faSync,
+    faDownload, faTrashAlt, faFileExcel, faBan, faSync,
 } from '@fortawesome/free-solid-svg-icons';
 import { EnsoTable } from '@enso-ui/tables/bulma';
 import { EnsoSelect } from '@enso-ui/select/bulma';
