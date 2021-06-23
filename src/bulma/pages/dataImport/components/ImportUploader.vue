@@ -1,6 +1,6 @@
 <template>
     <div class="is-flex">
-        <a class="button is-info has-margin-right-medium"
+        <a class="button is-info mr-2"
             :href="templateLink">
             <span>{{ i18n('Template') }}</span>
             <span class="icon is-small">

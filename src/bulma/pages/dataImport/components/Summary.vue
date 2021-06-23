@@ -11,7 +11,7 @@
                 <p class="title is-6 has-text-centered is-marginless">
                     {{ category }}:
                 </p>
-                <div class="tags is-centered has-padding-top-large has-padding-bottom-large">
+                <div class="tags is-centered py-3">
                     <span class="tag is-medium is-bold has-text-danger"
                         v-for="error in errors"
                         :key="error">
