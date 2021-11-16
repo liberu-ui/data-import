@@ -1,6 +1,5 @@
 <template>
-    <modal v-on="$listeners"
-        portal="import-summary">
+    <modal portal="import-summary">
         <div class="box">
             <p class="title is-4 has-text-centered">
                 <fa icon="exclamation-triangle"/>

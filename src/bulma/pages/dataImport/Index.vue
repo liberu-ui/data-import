@@ -29,32 +29,32 @@
             :filters="filters"
             @download-rejected="rejected"
             ref="imports">
-            <template #:type="{ column, row }">
+            <template #type="{ column, row }">
                 <span class="tag is-table-tag is-info">
                     {{ column.enum._get(row.type) }}
                 </span>
             </template>
-            <template #:entries="{ row }">
+            <template #entries="{ row }">
                 <strong class="has-text-info">
                     {{ row.entries || '-' }}
                 </strong>
             </template>
-            <template #:successful="{ row }">
+            <template #successful="{ row }">
                 <strong class="has-text-success">
                     {{ row.successful === null ? '-' : row.successful }}
                 </strong>
             </template>
-            <template #:failed="{ row }">
+            <template #failed="{ row }">
                 <strong class="has-text-danger">
                     {{ row.failed === null ? '-' : row.failed }}
                 </strong>
             </template>
-            <template #:status="{ column, row }">
+            <template #status="{ column, row }">
                 <span :class="['tag is-table-tag', enums.importCssClasses._get(row.status)]">
                     {{ column.enum._get(row.status) }}
                 </span>
             </template>
-            <template #:createdBy="{ row }">
+            <template #createdBy="{ row }">
                 <avatar class="is-24x24"
                     :user="row.createdBy"/>
             </template>

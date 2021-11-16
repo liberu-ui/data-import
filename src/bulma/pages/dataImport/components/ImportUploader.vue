@@ -11,12 +11,11 @@
             :params="params"
             :file-size-limit="fileSizeLimit"
             file-key="import"
-            v-on="$listeners"
             @upload-start="loading = true"
             @upload-error="loading = false"
             @upload-successful="uploaded"
             ref="uploader">
-            <template #:control="{ controlEvents }"
+            <template #control="{ controlEvents }"
                 v-if="!hasErrors">
                 <a :class="['button is-success', { 'is-loading': loading }]"
                     v-on="controlEvents">
