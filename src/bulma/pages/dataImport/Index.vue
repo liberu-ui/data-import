@@ -116,11 +116,13 @@ export default {
         template() {
             axios.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
-                .catch(this.errorHandler);
+                .catch(error => {
+                    this.type = null;
+                    this.errorHandler(error);
+                });
         },
-        //  eslint-disable-next-line camelcase
-        rejected({ rejected_id }) {
-            window.location.href = this.route('import.rejected', rejected_id);
+        rejected({ rejected_id: id }) {
+            window.location.href = this.route('import.rejected', id);
         },
     },
 };
