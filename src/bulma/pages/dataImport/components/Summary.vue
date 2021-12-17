@@ -1,5 +1,5 @@
 <template>
-    <modal portal="import-summary">
+    <modal>
         <div class="box">
             <p class="title is-4 has-text-centered">
                 <fa icon="exclamation-triangle"/>
