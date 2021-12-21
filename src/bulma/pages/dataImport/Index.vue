@@ -5,7 +5,7 @@
                 <enso-select v-model="type"
                     :options="enums.importTypes._select()"
                     placeholder="Import Type"
-                    @input="type ? template() : null"/>
+                    @update:modelValue="type ? template() : null"/>
             </div>
             <template v-if="type">
                 <div v-for="param in params"
