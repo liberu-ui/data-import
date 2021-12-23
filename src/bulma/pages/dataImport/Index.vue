@@ -87,7 +87,7 @@ export default {
         Param,
     },
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
+    inject: ['canAccess', 'errorHandler', 'http', 'i18n', 'route'],
 
     data: () => ({
         type: null,
@@ -114,7 +114,7 @@ export default {
 
     methods: {
         template() {
-            axios.get(this.route('import.show', this.type))
+            this.http.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(this.errorHandler);
         },
