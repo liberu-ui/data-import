@@ -5,7 +5,7 @@
                 <enso-select v-model="type"
                     :options="enums.importTypes._select()"
                     placeholder="Import Type"
-                    @input="type ? template() : null"/>
+                    @update:model-value="type ? template() : null"/>
             </div>
             <template v-if="type">
                 <div v-for="param in params"
@@ -29,32 +29,32 @@
             :filters="filters"
             @download-rejected="rejected"
             ref="imports">
-            <template v-slot:type="{ column, row }">
+            <template #type="{ column, row }">
                 <span class="tag is-table-tag is-info">
                     {{ column.enum._get(row.type) }}
                 </span>
             </template>
-            <template v-slot:entries="{ row }">
+            <template #entries="{ row }">
                 <strong class="has-text-info">
                     {{ row.entries || '-' }}
                 </strong>
             </template>
-            <template v-slot:successful="{ row }">
+            <template #successful="{ row }">
                 <strong class="has-text-success">
                     {{ row.successful === null ? '-' : row.successful }}
                 </strong>
             </template>
-            <template v-slot:failed="{ row }">
+            <template #failed="{ row }">
                 <strong class="has-text-danger">
                     {{ row.failed === null ? '-' : row.failed }}
                 </strong>
             </template>
-            <template v-slot:status="{ column, row }">
+            <template #status="{ column, row }">
                 <span :class="['tag is-table-tag', enums.importCssClasses._get(row.status)]">
                     {{ column.enum._get(row.status) }}
                 </span>
             </template>
-            <template v-slot:createdBy="{ row }">
+            <template #createdBy="{ row }">
                 <avatar class="is-24x24"
                     :user="row.createdBy"/>
             </template>
@@ -79,8 +79,6 @@ library.add(faDownload, faTrashAlt, faFileExcel, faBan, faSync);
 export default {
     name: 'Index',
 
-    inject: ['canAccess', 'errorHandler', 'i18n', 'route'],
-
     components: {
         Avatar,
         EnsoSelect,
@@ -88,6 +86,8 @@ export default {
         ImportUploader,
         Param,
     },
+
+    inject: ['canAccess', 'errorHandler', 'http', 'i18n', 'route'],
 
     data: () => ({
         type: null,
@@ -114,7 +114,7 @@ export default {
 
     methods: {
         template() {
-            axios.get(this.route('import.show', this.type))
+            this.http.get(this.route('import.show', this.type))
                 .then(({ data: { params } }) => (this.params = params))
                 .catch(error => {
                     this.type = null;

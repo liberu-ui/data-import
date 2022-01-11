@@ -1,6 +1,5 @@
 <template>
-    <modal v-on="$listeners"
-        portal="import-summary">
+    <modal>
         <div class="box">
             <p class="title is-4 has-text-centered">
                 <fa icon="exclamation-triangle"/>
@@ -24,6 +23,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from '@enso-ui/modal/bulma';
@@ -33,7 +33,7 @@ library.add(faExclamationTriangle);
 export default {
     name: 'Summary',
 
-    components: { Modal },
+    components: { Fa, Modal },
 
     inject: ['i18n'],
 

@@ -11,12 +11,11 @@
             :params="params"
             :file-size-limit="fileSizeLimit"
             file-key="import"
-            v-on="$listeners"
             @upload-start="loading = true"
             @upload-error="loading = false"
             @upload-successful="uploaded"
             ref="uploader">
-            <template v-slot:control="{ controlEvents }"
+            <template #control="{ controlEvents }"
                 v-if="!hasErrors">
                 <a :class="['button is-success', { 'is-loading': loading }]"
                     v-on="controlEvents">
@@ -36,6 +35,7 @@
 </template>
 
 <script>
+import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { Uploader } from '@enso-ui/uploader/bulma';
@@ -46,7 +46,7 @@ library.add(faUpload);
 export default {
     name: 'ImportUploader',
 
-    components: { Uploader, Summary },
+    components: { Fa, Uploader, Summary },
 
     inject: ['canAccess', 'i18n', 'route'],
 
@@ -58,7 +58,7 @@ export default {
         params: {
             type: Object,
             required: true,
-            validator: (v) => Object.keys(v).includes('type'),
+            validator: v => Object.keys(v).includes('type'),
         },
         path: {
             type: String,

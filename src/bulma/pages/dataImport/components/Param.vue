@@ -41,7 +41,7 @@ export default {
             required: true,
         },
     },
-    
+
     computed: {
         component() {
             return ucfirst(this.param.type);
@@ -49,4 +49,3 @@ export default {
     },
 };
 </script>
-

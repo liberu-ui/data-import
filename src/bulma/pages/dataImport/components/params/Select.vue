@@ -29,7 +29,7 @@ export default {
             return this.param.placeholder
                 ? this.i18n(this.param.placeholder)
                 : this.param.placeholder;
-        }
-    }
+        },
+    },
 };
 </script>
