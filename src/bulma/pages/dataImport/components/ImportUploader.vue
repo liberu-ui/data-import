@@ -48,7 +48,7 @@ export default {
 
     components: { Fa, EnsoUploader, Summary },
 
-    inject: ['canAccess', 'i18n', 'route'],
+    inject: ['canAccess', 'http', 'i18n', 'route'],
 
     props: {
         fileSizeLimit: {
