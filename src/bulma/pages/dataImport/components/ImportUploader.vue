@@ -8,6 +8,7 @@
             </span>
         </a>
         <uploader :url="path"
+            :http="http"
             :params="params"
             :file-size-limit="fileSizeLimit"
             file-key="import"
@@ -48,7 +49,7 @@ export default {
 
     components: { Fa, Uploader, Summary },
 
-    inject: ['canAccess', 'i18n', 'route'],
+    inject: ['canAccess', 'http', 'i18n', 'route'],
 
     props: {
         fileSizeLimit: {
