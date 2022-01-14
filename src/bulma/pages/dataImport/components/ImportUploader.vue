@@ -7,7 +7,7 @@
                 <fa icon="download"/>
             </span>
         </a>
-        <uploader :url="path"
+        <enso-uploader :url="path"
             :params="params"
             :file-size-limit="fileSizeLimit"
             file-key="import"
@@ -27,7 +27,7 @@
                     </slot>
                 </a>
             </template>
-        </uploader>
+        </enso-uploader>
         <Summary :summary="summary"
             @close="summary = null"
             v-if="hasErrors"/>
@@ -38,7 +38,7 @@
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-import { Uploader } from '@enso-ui/uploader/bulma';
+import { EnsoUploader } from '@enso-ui/uploader/bulma';
 import Summary from './Summary.vue';
 
 library.add(faUpload);
@@ -46,7 +46,7 @@ library.add(faUpload);
 export default {
     name: 'ImportUploader',
 
-    components: { Fa, Uploader, Summary },
+    components: { Fa, EnsoUploader, Summary },
 
     inject: ['canAccess', 'i18n', 'route'],
 
