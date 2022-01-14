@@ -67,6 +67,8 @@ export default {
         },
     },
 
+    emits: ['upload-successful'],
+
     data: () => ({
         loading: false,
         summary: null,
@@ -88,7 +90,7 @@ export default {
         uploaded($event) {
             this.summary = $event;
             this.loading = false;
-            // this.$emit('upload-successful');
+            this.$emit('upload-successful');
         },
         browseFiles() {
             this.$refs.uploader.browseFiles();
