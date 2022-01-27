@@ -1,6 +1,7 @@
 <template>
     <enso-select v-model="param.value"
          :source="param.route"
+         :options="param.options"
          :label="param.selectLabel"
          :placeholder="placeholder"
          :multiple="param.multiple"
