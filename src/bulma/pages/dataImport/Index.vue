@@ -1,5 +1,6 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper"
+        v-if="!switchingGroup">
         <div class="columns is-variable is-2 is-mobile is-multiline">
             <div class="column is-3-desktop is-half-touch">
                 <enso-select v-model="type"
@@ -96,6 +97,7 @@ export default {
 
     computed: {
         ...mapState(['enums']),
+        ...mapState('local', ['switchingGroup']),
         filters() {
             return { data_imports: { type: this.type } };
         },
@@ -121,8 +123,8 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        rejected({ rejected_id: id }) {
-            window.location.href = this.route('import.rejected', id);
+        rejected({ rejected: { file_id } }) {
+            window.location.href = this.route('import.rejected', file_id);
         },
     },
 };
