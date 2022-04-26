@@ -123,8 +123,8 @@ export default {
                     this.errorHandler(error);
                 });
         },
-        rejected({ rejected: { file_id } }) {
-            window.location.href = this.route('import.rejected', file_id);
+        rejected({ rejected: { id } }) {
+            window.location.href = this.route('import.rejected', id);
         },
     },
 };
