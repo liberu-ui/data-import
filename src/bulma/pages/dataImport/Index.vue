@@ -3,7 +3,7 @@
         <div class="columns is-variable is-2 is-mobile is-multiline">
             <div class="column is-3-desktop is-half-touch">
                 <enso-select v-model="type"
-                    :options="enums.importTypes._select()"
+                    :options="options"
                     placeholder="Import Type"
                     @update:model-value="type ? template() : null"/>
             </div>
@@ -92,6 +92,7 @@ export default {
     data: () => ({
         type: null,
         params: [],
+        options: [],
     }),
 
     computed: {
@@ -110,6 +111,12 @@ export default {
                 return params;
             }, { type: this.type });
         },
+    },
+
+    created() {
+        this.http.get(this.route('import.options'))
+            .then(({data}) => (this.options = data))
+            .catch(this.errorHandler);
     },
 
     methods: {
