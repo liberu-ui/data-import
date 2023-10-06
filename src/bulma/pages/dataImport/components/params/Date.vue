@@ -7,7 +7,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Datepicker } from '@enso-ui/datepicker/bulma';
+import { Datepicker } from '@liberu-ui/datepicker/bulma';
 
 export default {
     name: 'Date',

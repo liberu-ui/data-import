@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { EnsoSelect } from '@enso-ui/select/bulma';
+import { EnsoSelect } from '@liberu-ui/select/bulma';
 
 export default {
     name: 'Select',
