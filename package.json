@@ -1,6 +1,6 @@
 {
   "name": "@liberu-ui/data-import",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "Basic Data Import package",
   "main": "src/bulma/pages/dataImport/Index.vue",
   "scripts": {
