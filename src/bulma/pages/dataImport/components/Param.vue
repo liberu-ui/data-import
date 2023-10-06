@@ -18,7 +18,7 @@
 <script>
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { ucfirst } from '@enso-ui/strings';
+import { ucfirst } from '@liberu-ui/strings';
 import Checkbox from './params/Checkbox.vue';
 import Input from './params/Input.vue';
 import Date from './params/Date.vue';

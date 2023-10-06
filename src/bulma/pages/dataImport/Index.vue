@@ -68,9 +68,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faDownload, faTrashAlt, faFileExcel, faBan, faSync,
 } from '@fortawesome/free-solid-svg-icons';
-import { EnsoTable } from '@enso-ui/tables/bulma';
-import { EnsoSelect } from '@enso-ui/select/bulma';
-import { Avatar } from '@enso-ui/users';
+import { EnsoTable } from '@liberu-ui/tables/bulma';
+import { EnsoSelect } from '@liberu-ui/select/bulma';
+import { Avatar } from '@liberu-ui/users';
 import ImportUploader from './components/ImportUploader.vue';
 import Param from './components/Param.vue';
 
