@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enso-ui/data-import.git"
+    "url": "git+https://github.com/liberu-ui/data-import.git"
   },
   "keywords": [
     "data-import",
@@ -17,9 +17,9 @@
   "author": "Adrian Ocneanu <aocneanu@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/enso-ui/data-import/issues"
+    "url": "https://github.com/liberu-ui/data-import/issues"
   },
-  "homepage": "https://github.com/enso-ui/data-import#readme",
+  "homepage": "https://github.com/liberu-ui/data-import#readme",
   "dependencies": {
     "@liberu-ui/datepicker": "^2.0",
     "@liberu-ui/directives": "^2.0",

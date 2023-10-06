@@ -38,7 +38,7 @@
 import { FontAwesomeIcon as Fa } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
-import { EnsoUploader } from '@enso-ui/uploader/bulma';
+import { EnsoUploader } from '@liberu-ui/uploader/bulma';
 import Summary from './Summary.vue';
 
 library.add(faUpload);

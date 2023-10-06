@@ -1,10 +1,10 @@
 # Data Import
 
-![npm license](https://img.shields.io/npm/l/@enso-ui/data-import.svg) 
-![npm download](https://img.shields.io/npm/dm/@enso-ui/data-import.svg) 
-![GitHub top language](https://img.shields.io/github/languages/top/enso-ui/data-import.svg) 
-![GitHub issues](https://img.shields.io/github/issues/enso-ui/data-import.svg) 
-![npm version](https://img.shields.io/npm/v/@enso-ui/data-import.svg) 
+![npm license](https://img.shields.io/npm/l/@liberu-ui/data-import.svg) 
+![npm download](https://img.shields.io/npm/dm/@liberu-ui/data-import.svg) 
+![GitHub top language](https://img.shields.io/github/languages/top/liberu-ui/data-import.svg) 
+![GitHub issues](https://img.shields.io/github/issues/liberu-ui/data-import.svg) 
+![npm version](https://img.shields.io/npm/v/@liberu-ui/data-import.svg) 
 
 ## Usage
 The component cannot be used outside of the Liberu ecosystem.
